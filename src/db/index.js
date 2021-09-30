@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 async function connect (){
     try {
-        await mongoose.connect('mongodb+srv://TranThanhDanh:danhtran123@cluster0.gkz6p.mongodb.net/anhHieu_dev', {
+        await mongoose.connect('mongodb+srv://TranThanhDanh:danhtran123@cluster0.gkz6p.mongodb.net/Product_dev', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
@@ -12,6 +12,6 @@ async function connect (){
         console.log(error);
     }
 }
-module.exports = {
+module.exports = {  
     connect
 }

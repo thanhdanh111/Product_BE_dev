@@ -27,7 +27,7 @@ async function Registers(req, res) {
       to: req.body.email, // list of receivers
       subject: `Hello Hoang`, // Subject line
       text: `Anh la Danh Day`,
-      html: `<a href="http://localhost:5000/verify-email?email=${hashedToken}">Verify Email </a>`, // html body
+      html: `<a href="http://localhost:5000/verify-email?verifyToken=${user.verifyToken}">Verify Email </a>`, // html body
     });
     await newUser.save();
     return res.status(201).json(true);
@@ -38,13 +38,13 @@ async function Registers(req, res) {
 
 async function verifyEmail(req, res) {
   try{
-    const user = await userSchema.findOne({email: req.query.email});
+    const user = await userSchema.findOne({verifyToken: req.query.verifyToken});
     if(!user){
       return res.status(401).json({message:'invalid token'})
     }
     user.verifyEmail = true
     await user.save()
-    return res.redirect('http://localhost:3000/register')
+    return res.redirect('http://localhost:3000/login')
   }catch{
     return res.status(401).json({message:'error'})
   }

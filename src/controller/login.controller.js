@@ -16,7 +16,8 @@ async function login(req,res) {
     }
 }
 function getToken(req,res) {
-    const userEmail = req.body.email;
+    try {
+        const userEmail = req.body.email;
     const user = { email: userEmail}
 
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
@@ -24,6 +25,9 @@ function getToken(req,res) {
     res.status(200).json({
         token : accessToken
     })
+    } catch (error) {
+        return res.status(500).json({message: 'error token'})
+    }
 
 }
 
